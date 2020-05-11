@@ -1385,7 +1385,7 @@ krb5_error_code ipadb_get_principal(krb5_context kcontext,
                     *entry = kentry;
 
                     goto done;
-                } else {
+                } else if (!(flags & KRB5_KDB_FLAG_INCLUDE_PAC)) {
                     /* server referrals: lookup krbtgt/next_realm@our_realm */
                     krb5_principal tgtp;
 
@@ -1401,6 +1401,7 @@ krb5_error_code ipadb_get_principal(krb5_context kcontext,
                     }
 
                     krb5_free_unparsed_name(kcontext, principal);
+                    principal = NULL;
                     kerr = krb5_unparse_name(kcontext, tgtp, &principal);
                     krb5_free_principal(kcontext, tgtp);
                     if (kerr != 0) {

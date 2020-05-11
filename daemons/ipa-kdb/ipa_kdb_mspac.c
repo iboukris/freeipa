@@ -2198,7 +2198,7 @@ krb5_error_code ipadb_sign_authdata(krb5_context context,
     }
 
     /* we need to create a PAC if we are requested one and this is an AS REQ,
-     * or we are doing protocol transition (S4U) but not over cross-realm */
+     * or we are doing protocol transition (S4U2Self) but not over cross-realm */
     if ((is_as_req && (flags & KRB5_KDB_FLAG_INCLUDE_PAC)) ||
         ((flags & KRB5_KDB_FLAG_PROTOCOL_TRANSITION) && client != NULL)) {
         make_ad = true;
