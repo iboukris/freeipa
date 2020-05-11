@@ -1386,6 +1386,7 @@ krb5_error_code ipadb_get_principal(krb5_context kcontext,
 
                     goto done;
                 } else if (flags & KRB5_KDB_FLAG_INCLUDE_PAC) {
+                    kerr = KRB5_KDB_NOENTRY;
                     goto done;
                 } else {
                     /* server referrals: lookup krbtgt/next_realm@our_realm */
