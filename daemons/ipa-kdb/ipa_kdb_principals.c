@@ -1385,7 +1385,9 @@ krb5_error_code ipadb_get_principal(krb5_context kcontext,
                     *entry = kentry;
 
                     goto done;
-                } else if (!(flags & KRB5_KDB_FLAG_INCLUDE_PAC)) {
+                } else if (flags & KRB5_KDB_FLAG_INCLUDE_PAC) {
+                    goto done;
+                } else {
                     /* server referrals: lookup krbtgt/next_realm@our_realm */
                     krb5_principal tgtp;
 
