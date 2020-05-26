@@ -1374,9 +1374,12 @@ static krb5_error_code dbget_alias(krb5_context kcontext,
 
     /*
      * Per RFC6806 section 7 and 8, the canonicalize flag is required for
-     * both client and server referrals.
+     * both client and server referrals.  But it is more useful to ignore
+     * it like Windows KDC does.
+     * Allow it in client referrals like we used to.
      */
-    if ((flags & KRB5_KDB_FLAG_CANONICALIZE) == 0) {
+    if (((flags & KRB5_KDB_FLAG_CANONICALIZE) == 0) &&
+    if  ((flags & KRB5_KDB_FLAG_CLIENT_REFERRALS_ONLY) == 0)) {
         kerr = KRB5_KDB_NOENTRY;
         goto done;
     }
